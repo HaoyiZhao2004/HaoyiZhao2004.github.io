@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub Pages JSON Demo</title>
+</head>
+<body>
+  <h1>静态网页读取 JSON 示例</h1>
+  <pre id="output"></pre>
+
+  <script>
+    // 注意路径是相对路径
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(err => console.error('加载 JSON 出错:', err));
+  </script>
+</body>
+</html>
