@@ -1,21 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>GitHub Pages JSON Demo</title>
+  <title>赵豪宜的Markdown页面</title>
+  <!-- 引入 marked.js 用于 Markdown 转 HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: "微软雅黑", sans-serif;
+      max-width: 800px;
+      margin: 30px auto;
+      line-height: 1.8;
+    }
+    h1, h2, h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h1>静态网页读取 JSON 示例</h1>
-  <pre id="output"></pre>
+  <div id="content">加载中...</div>
 
   <script>
-    // 注意路径是相对路径
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+    // 用 fetch 读取 zhaohaoyi.md 并渲染
+    fetch('zhaohaoyi.md')
+      .then(res => res.text())
+      .then(md => {
+        document.getElementById('content').innerHTML = marked.parse(md);
       })
-      .catch(err => console.error('加载 JSON 出错:', err));
+      .catch(err => {
+        document.getElementById('content').innerHTML = '加载失败：' + err;
+      });
   </script>
 </body>
 </html>
